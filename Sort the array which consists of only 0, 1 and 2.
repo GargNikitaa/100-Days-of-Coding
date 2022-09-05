@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int _count[3]={0,0,0};
+
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i]==0)
+                _count[0]++;
+            else if(nums[i]==1)
+                _count[1]++;
+            else
+                _count[2]++;
+        }
+        for(int i=0; i<nums.size(); i++){
+            if(i<_count[0])
+                nums[i]=0;
+            else if(i<_count[1]+_count[0])
+                nums[i]=1;
+            else
+                nums[i]=2;
+        }
+    }
+};
