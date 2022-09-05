@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minimumDeletions(vector<int>& nums) {
+        int mini=INT_MAX, maxi=INT_MIN, min_index, max_index, ans;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i]>maxi){
+                maxi=nums[i];
+                max_index=i;
+            }
+            if(nums[i]<mini){
+                mini=nums[i];
+                min_index=i;
+            }
+        }
+        int case1=max(min_index, max_index)+1;
+        int case2=nums.size()-min(min_index, max_index);
+        int case3=nums.size()-(max(min_index, max_index)-min(min_index, max_index))+1;
+        if(case1<=case2 && case1<=case3)
+            return case1;
+        else if(case2<=case1 && case2<=case3){
+            return case2;
+        }
+        return case3;
+    }
+};
