@@ -1,0 +1,21 @@
+class Solution {
+private:
+    int solve(ListNode* temp, int count){
+        if(temp->next==NULL)
+            return temp->val;
+        return solve(temp->next, count-1)+pow(2, count)*(temp->val);
+        
+    }
+public:
+    int getDecimalValue(ListNode* head) {
+        ListNode *temp=head;
+        int count=0;
+        while(true){
+            count=count+1;
+            if(temp==NULL || temp->next==NULL)
+                break;
+            temp=temp->next;
+        }
+        return solve(head, count-1);
+    }
+};
