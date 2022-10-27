@@ -1,0 +1,36 @@
+#include <bits/stdc++.h> 
+bool isPossible(vector<int>time, int n, int m, unsigned long long int mid){
+    unsigned long long int time_per_day=0, day=1;
+    for(int i=0; i<m; i++){
+        time_per_day+=time[i];
+        if(time_per_day>mid){
+            time_per_day=time[i];
+            day++;
+            if(day>n || time[i]>mid)
+                return false;
+        }
+   
+    }
+    return true;
+}
+
+long long ayushGivesNinjatest(int n, int m, vector<int> time) 
+{    
+    unsigned long long int total_time=0;
+    unsigned long long int ans=-1;
+    for(int i=0; i<time.size(); i++){
+        total_time+=time[i];
+    }
+    unsigned long long int s=0, e=total_time;
+    unsigned long long int mid=s+(e-s)/2;
+    while(s<=e){
+        if(isPossible(time,n,m,mid)){
+            ans=mid;
+            e=mid-1;
+        }
+        else
+            s=mid+1;
+        mid=s+(e-s)/2;
+    }
+    return ans;
+}
