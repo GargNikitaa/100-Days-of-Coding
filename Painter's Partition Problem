@@ -1,0 +1,36 @@
+bool PaintPossible(vector<int>boards, int k, int mid){
+    unsigned long long int area_per_painter=0;
+    unsigned long long int painters=1;
+    for(int i=0; i<boards.size(); i++){
+        area_per_painter+=boards[i];
+        if(area_per_painter>mid){
+            painters++;
+            if(painters>k || boards[i]>mid)
+                return false;
+            area_per_painter=boards[i];
+        }
+    }
+    return true;
+}
+
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    unsigned long long int total_area=0;
+    for(int i=0; i<boards.size(); i++){
+        total_area+=boards[i];
+    }
+    unsigned long long int ans=-1;
+    unsigned long long int s=0, e=total_area;
+    unsigned long long int mid=s+(e-s)/2;
+    while(s<=e){
+        if(PaintPossible(boards, k, mid)){
+            ans=mid;
+            e=mid-1;
+        }
+        else{
+            s=mid+1;
+        }
+        mid=s+(e-s)/2;
+    }
+    return ans;
+}
