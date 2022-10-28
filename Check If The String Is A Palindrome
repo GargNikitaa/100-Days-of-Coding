@@ -1,0 +1,23 @@
+string reverse(string str){
+        int s=0, e=str.size()-1;
+        while(s<=e){
+            swap(str[s++], str[e--]);
+        }
+        return str;
+    }
+    bool checkPalindrome(string s) {
+        string new1, rev;
+        for(int i=0; i<s.size(); i++){
+            if(s[i]>='A' && s[i]<='Z'){
+                new1.push_back(s[i]+'a'-'A');
+            }
+            else if((s[i]>='a' && s[i]<='z') || (s[i]>='0' && s[i]<='9')){
+                new1.push_back(s[i]);
+            }
+        }
+        rev=reverse(new1);
+        if(rev==new1){
+            return true;
+        }
+        return false;
+    }
