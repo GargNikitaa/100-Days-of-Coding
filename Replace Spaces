@@ -1,0 +1,12 @@
+string replaceSpaces(string &str){
+    string new1="";
+	for(int i=0; i<str.length(); i++){
+        if(str[i]==' '){
+            new1.push_back('@');
+            new1.push_back('4');
+            new1.push_back('0');
+        }
+        else new1.push_back(str[i]);
+    }
+    return new1;
+}
