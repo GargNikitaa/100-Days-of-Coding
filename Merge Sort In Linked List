@@ -1,0 +1,58 @@
+node* findMid(node* head) {
+    node* slow = head;
+    node* fast = head -> next;
+    
+    while(fast != NULL && fast -> next != NULL) {
+        slow = slow -> next;
+        fast = fast -> next -> next; 
+    }
+    return slow;
+}
+
+
+node* merge(node*first, node* second){
+    if(first==NULL)
+        return second;
+    if(second==NULL)
+        return first;
+    node * ans= new node(-1);
+    node * temp=ans;
+    while(first!=NULL && second!=NULL){
+        if(first->data>=second->data){
+            temp->next=second;
+            second=second->next;
+            temp=temp->next;
+        }
+        else{
+            temp->next=first;
+            first=first->next;
+            temp=temp->next;
+        }
+    }
+    while(first!=NULL){
+       temp->next=first;
+        first=first->next;
+        temp=temp->next; 
+    }
+    while(second!=NULL){
+        temp->next=second;
+        second=second->next;
+        temp=temp->next;
+    }
+    ans=ans->next;
+    return ans;
+}
+
+node* mergeSort(node *head) {
+    if(head==NULL || head->next==NULL)
+        return head;
+    node*mid=findMid(head);
+    node*left=head;
+    node*right=mid->next;
+    mid->next=NULL;
+    
+    left= mergeSort(left);
+    right= mergeSort(right);
+    
+    return merge(left,right);
+}
