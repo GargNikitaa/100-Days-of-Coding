@@ -2,9 +2,9 @@ bool isValid(string s) {
 stack<char> expression;
     for (char& ch : s) {
         switch (ch) {
-            case '(': expression.push(c); break;
-            case '{': expression.push(c); break;
-            case '[': expression.push(c); break;
+            case '(': expression.push(ch); break;
+            case '{': expression.push(ch); break;
+            case '[': expression.push(ch); break;
             case ')': if (expression.empty() || expression.top()!='(') return false; else expression.pop(); break;
             case '}': if (expression.empty() || expression.top()!='{') return false; else expression.pop(); break;
             case ']': if (expression.empty() || expression.top()!='[') return false; else expression.pop(); break;
