@@ -1,0 +1,33 @@
+class Solution {
+private:
+    void quickSort(vector<int>& nums, int s, int e){
+        if(s>=e)
+            return;
+        int pivot=nums[s];
+        int pivotIndex=s;
+        for(int i=s+1; i<=e; i++){
+            if(nums[i]<=pivot)
+                pivotIndex++;
+        }
+        swap(nums[pivotIndex], nums[s]);
+        int i=s, j=e;
+        while(i<pivotIndex && j>pivotIndex){
+            while(nums[i]<=pivot){
+                i++;
+            }
+            while(nums[j]>pivot){
+                j--;
+            }
+            if(i<pivotIndex && j>pivotIndex)
+                swap(nums[i++],nums[j--]);
+        }
+        quickSort(nums, s, pivotIndex-1);
+        quickSort(nums, pivotIndex+1, e);
+    }
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int n=nums.size();
+        quickSort(nums, 0, n-1);
+        return nums[n-k];
+    }
+};
