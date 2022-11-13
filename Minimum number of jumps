@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+
+// } Driver Code Ends
+// Function to return minimum number of jumps to end of array
+
+class Solution{
+    void solve(int arr[], int n, int& index, int &jumps){
+        if(index>=n-1 || arr[index]==0){
+            return;
+        }
+        int maxi=INT_MIN;
+        int i=index+1, newIndex;
+        for(i; i<=arr[index]+index && i<n; i++){
+           if(arr[i]>=maxi || i==n-1 || maxi-arr[i]<i-newIndex){
+               newIndex=i;
+               maxi=arr[i];
+           }
+        }
+        index=newIndex;
+        jumps++;
+        solve(arr, n, index, jumps);
+    }
+  public:
+    int minJumps(int arr[], int n){
+        int jumps=0;
+        int index=0;
+        solve(arr, n, index,jumps);
+        if(index<n-1)
+            return -1;
+        return jumps;
+    }
+};
+
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n,i,j;
+        cin>>n;
+        int arr[n];
+        for(int i=0; i<n; i++)
+            cin>>arr[i];
+        Solution obj;
+        cout<<obj.minJumps(arr, n)<<endl;
+    }
+    return 0;
+}
+
+// } Driver Code Ends
