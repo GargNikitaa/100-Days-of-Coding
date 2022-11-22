@@ -1,0 +1,21 @@
+class Solution {
+    bool compare(TreeNode* root, TreeNode* subRoot){
+        if(root==NULL && subRoot==NULL)
+            return true;
+        if(root==NULL || subRoot==NULL)
+            return false;
+        if(root->val != subRoot->val)
+            return false;
+        return compare(root->left, subRoot->left) && compare(root->right, subRoot->right);
+    }
+public:
+    bool isSubtree(TreeNode* root, TreeNode* subRoot) {
+        if(root==NULL )
+            return false;
+        if(root->val==subRoot->val  &&  compare(root, subRoot))
+            return true;
+        bool left = isSubtree(root->left, subRoot);
+        bool right = isSubtree(root->right, subRoot);
+        return left || right;   
+    }
+};
