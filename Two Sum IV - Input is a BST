@@ -1,0 +1,24 @@
+class Solution {
+    void inorder_traversal(TreeNode* root, vector<int>&arr){
+        if(root==NULL)
+            return;
+        inorder_traversal(root->left, arr);
+        arr.push_back(root->val);
+        inorder_traversal(root->right, arr);
+    }
+public:
+    bool findTarget(TreeNode* root, int k) {
+        vector<int> inorder;
+        inorder_traversal(root, inorder);
+        int start = 0, end = inorder.size()-1;
+        while(end>start){
+            if(inorder[start]+inorder[end] == k)
+                return true;
+            else if(inorder[start]+inorder[end] > k)
+                end--;
+            else
+                start++;
+        }
+        return false;
+    }
+};
