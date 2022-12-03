@@ -1,0 +1,29 @@
+class info{
+    public:
+    int mini;
+    int maxi;
+    bool isBST;
+    int size;
+};
+info checkBST(TreeNode<int>* root, int &ans){
+    if(root==NULL)
+        return {INT_MAX, INT_MIN, true, 0};
+    info curNode;
+    info left = checkBST(root->left, ans);
+    info right = checkBST(root->right, ans);
+    curNode.mini = min(root->data, left.mini);
+    curNode.maxi = max(root->data, right.maxi);
+    curNode.size = left.size + right.size + 1;
+    if(left.isBST && right.isBST && (root->data > left.maxi && root->data <right.mini))
+        curNode.isBST = true;
+    else
+        curNode.isBST = false;
+    if(curNode.isBST)
+        ans = max(ans, curNode.size);
+    return curNode;
+}
+int largestBST(TreeNode<int>* root) {
+    int maxSize = 0;
+    info temp = checkBST(root, maxSize);
+    return maxSize;
+}
